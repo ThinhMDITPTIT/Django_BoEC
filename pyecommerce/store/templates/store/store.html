@@ -1,0 +1,185 @@
+{% extends 'store/main.html' %} {% load static %} {% block content %}
+<h2 style="background-color: aquamarine; padding: 10px 20px 10px 40px">
+  All Products
+</h2>
+<h3 style="background-color: bisque;padding: 10px 20px 10px 40px">Crop Top</h3>
+<div class="row">
+
+  {% for product in products %}
+  <div class="col-lg-4" style="padding: 15px">
+    <img
+      style="border-radius: 10px 10px 0px 0px"
+      class="thumbnail"
+      src="{{product.image.url}}"
+    />
+    <div class="box-element product" style="border-radius: 0px 0px 20px 5px">
+      <h6><strong>{{product.name}}</strong></h6>
+      <hr />
+      <div
+        class="form-inline my-2 my-lg-0"
+        style="display: flex; justify-content: space-between"
+      >
+        <h6 style="display: inline-block">
+          <strong>{{product.price|floatformat:0}} VND</strong>
+        </h6>
+        <div class="form-inline my-2 my-lg-0">
+          <a
+            class="btn btn-success"
+            style="border-radius: 20px 0 10px 0"
+            name="detailproduct"
+            data-action="viewproduct"
+            data-product="{{product.id}}"
+            href="{% url 'detailproduct' pk=product.id %}"
+            >View</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+<h3 style="background-color: bisque;padding: 10px 20px 10px 40px">Pants</h3>
+<div class="row">
+
+  {% for product in PantsProduct %}
+  <div class="col-lg-4" style="padding: 15px">
+    <img
+      style="border-radius: 10px 10px 0px 0px"
+      class="thumbnail"
+      src="{{product.image.url}}"
+    />
+    <div class="box-element product" style="border-radius: 0px 0px 20px 5px">
+      <h6><strong>{{product.name}}</strong></h6>
+      <hr />
+      <div
+        class="form-inline my-2 my-lg-0"
+        style="display: flex; justify-content: space-between"
+      >
+        <h6 style="display: inline-block">
+          <strong>{{product.price|floatformat:0}} VND</strong>
+        </h6>
+        <div class="form-inline my-2 my-lg-0">
+          <a
+            class="btn btn-success"
+            style="border-radius: 20px 0 10px 0"
+            name="detailproduct"
+            data-action="viewproduct"
+            data-product="{{product.id}}"
+            href="{% url 'detailproduct' pk=product.id %}"
+            >View</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+<h3 style="background-color: bisque;padding: 10px 20px 10px 40px">Jactket</h3>
+<div class="row">
+
+  {% for product in JactketProduct %}
+  <div class="col-lg-4" style="padding: 15px">
+    <img
+      style="border-radius: 10px 10px 0px 0px"
+      class="thumbnail"
+      src="{{product.image.url}}"
+    />
+    <div class="box-element product" style="border-radius: 0px 0px 20px 5px">
+      <h6><strong>{{product.name}}</strong></h6>
+      <hr />
+      <div
+        class="form-inline my-2 my-lg-0"
+        style="display: flex; justify-content: space-between"
+      >
+        <h6 style="display: inline-block">
+          <strong>{{product.price|floatformat:0}} VND</strong>
+        </h6>
+        <div class="form-inline my-2 my-lg-0">
+          <a
+            class="btn btn-success"
+            style="border-radius: 20px 0 10px 0"
+            name="detailproduct"
+            data-action="viewproduct"
+            data-product="{{product.id}}"
+            href="{% url 'detailproduct' pk=product.id %}"
+            >View</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+<h3 style="background-color: bisque;padding: 10px 20px 10px 40px">Shoes</h3>
+<div class="row">
+
+  {% for product in ShoesProduct %}
+  <div class="col-lg-4" style="padding: 15px">
+    <img
+      style="border-radius: 10px 10px 0px 0px"
+      class="thumbnail"
+      src="{{product.image.url}}"
+    />
+    <div class="box-element product" style="border-radius: 0px 0px 20px 5px">
+      <h6><strong>{{product.name}}</strong></h6>
+      <hr />
+      <div
+        class="form-inline my-2 my-lg-0"
+        style="display: flex; justify-content: space-between"
+      >
+        <h6 style="display: inline-block">
+          <strong>{{product.price|floatformat:0}} VND</strong>
+        </h6>
+        <div class="form-inline my-2 my-lg-0">
+          <a
+            class="btn btn-success"
+            style="border-radius: 20px 0 10px 0"
+            name="detailproduct"
+            data-action="viewproduct"
+            data-product="{{product.id}}"
+            href="{% url 'detailproduct' pk=product.id %}"
+            >View</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+<h3 style="background-color: bisque;padding: 10px 20px 10px 40px">Dụng cụ luyện tập</h3>
+<div class="row">
+
+  {% for product in Sportequipment %}
+  <div class="col-lg-4" style="padding: 15px">
+    <img
+      style="border-radius: 10px 10px 0px 0px"
+      class="thumbnail"
+      src="{{product.image.url}}"
+    />
+    <div class="box-element product" style="border-radius: 0px 0px 20px 5px">
+      <h6><strong>{{product.name}}</strong></h6>
+      <hr />
+      <div
+        class="form-inline my-2 my-lg-0"
+        style="display: flex; justify-content: space-between"
+      >
+        <h6 style="display: inline-block">
+          <strong>{{product.price|floatformat:0}} VND</strong>
+        </h6>
+        <div class="form-inline my-2 my-lg-0">
+          <a
+            class="btn btn-success"
+            style="border-radius: 20px 0 10px 0"
+            name="detailproduct"
+            data-action="viewproduct"
+            data-product="{{product.id}}"
+            href="{% url 'detailproduct' pk=product.id %}"
+            >View</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock content %}

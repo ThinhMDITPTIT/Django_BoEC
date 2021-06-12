@@ -1,0 +1,255 @@
+{% extends 'store/main.html' %} {% load static %} {% block content %}
+<!--Section: Block Content-->
+<h2 style="background-color: aquamarine; padding: 10px 20px 10px 40px">
+  {{product.category}}
+</h2>
+<section class="mb-5" style="background-color: aliceblue; padding: 10px 10px;">
+  <div class="row">
+    <div class="col-md-6 mb-4 mb-md-0">
+      <div id="mdb-lightbox-ui"></div>
+
+      <div class="mdb-lightbox">
+        <div class="row product-gallery mx-1">
+          <div class="col-12 mb-0">
+            <figure class="view overlay rounded z-depth-1 main-img">
+              <a
+                href="{{product.image.url}}"
+                data-size="710x823"
+              >
+                <img
+                  src="{{product.image.url}}"
+                  class="img-fluid z-depth-1"
+                />
+              </a>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <h5>{{product.name}}</h5>
+      <!-- <p class="mb-2 text-muted text-uppercase small">{{product.category}}</p> -->
+      <p>
+        <span class="mr-1"><strong>Price: {{product.price|floatformat:0}} VND</strong></span>
+      </p>
+      <!-- <p class="pt-1">
+       {{product.description}}
+      </p> -->
+      <div class="form-inline my-2 my-lg-0"
+          style="display: flex; align-items: center;">
+      <!-- <div class="table-responsive"> -->
+        <!-- <table class="table table-sm table-borderless mb-0">
+          <tbody>
+            <tr> -->
+              <div class="pl-0 w-25" scope="row"><strong>Tag: </strong></div>
+              <div>
+              {% for tag in tags %}
+                <!-- <td> -->
+                  <a href="{% url 'category' name=tag.name %}" >#{{tag.name}}</a>
+                <!-- </td> -->
+              {% endfor %}
+              </div>
+            <!-- </tr>
+          </tbody>
+        </table> -->
+      </div>
+      <hr />
+      <!-- <div class="table-responsive mb-2">
+        <table class="table table-sm table-borderless">
+          <tbody> -->
+            <div 
+              class="form-inline my-2 my-lg-0 row"
+              style="display: flex; align-items: center;"
+            >
+              <div class="col-md-3"> 
+                <td class="pb-0">Select size: </td>
+              </div>
+              <div class="form-inline my-2 my-lg-0 col-md-8"
+              style="display: flex; align-items: center;">
+                  <!-- <div class="mt-1"> -->
+                    <div class="form-check form-check-inline pl-0">
+                      <input
+                        type="radio"
+                        class="form-check-input"
+                        id="small"
+                        name="size-option"
+                        value="Small"
+                      />
+                      <label
+                        class="form-check-label small text-uppercase card-link-secondary"
+                        for="small"
+                        >Small</label
+                      >
+                    </div>
+                    <div class="form-check form-check-inline pl-0">
+                      <input
+                        type="radio"
+                        class="form-check-input"
+                        id="medium"
+                        name="size-option"
+                        checked
+                        value="Medium"
+                      />
+                      <label
+                        class="form-check-label small text-uppercase card-link-secondary"
+                        for="medium"
+                        >Medium</label
+                      >
+                    </div>
+                    <div class="form-check form-check-inline pl-0">
+                      <input
+                        type="radio"
+                        class="form-check-input"
+                        id="large"
+                        name="size-option"
+                        value="Large"
+                      />
+                      <label
+                        class="form-check-label small text-uppercase card-link-secondary"
+                        for="large"
+                        >Large</label
+                      >
+                    </div>
+                  <!-- </div> -->
+              </div>
+            </div>
+            <hr/>
+            <div 
+              class="form-inline my-2 my-lg-0 row"
+              style="display: flex; align-items: center; margin-top: 15px;"
+            >
+              <div class="col-md-3" style="margin-top: 10px;">
+                <p class="pl-0 pb-0 w-25">Quantity: </p>
+              </div>
+              <div class="col-md-5">
+                <div class="def-number-input number-input safari_only mb-0">
+                  <input
+                    class="quantity"
+                    min="1"
+                    name="quantity"
+                    id="quantity"
+                    value="1"
+                    type="number"
+                    style="width: 40%; text-align: center;"
+                  />
+                </div>
+              </div>
+            </div>
+          <!-- </tbody>
+        </table>
+      </div> -->
+      <!-- <button type="button" class="btn btn-primary btn-md mr-1 mb-2">
+        Buy now
+      </button> -->
+      <hr/>
+      <button 
+        type="button" 
+        class="btn btn-primary btn-md mr-1 mb-2" 
+        data-action="addtocart" id="addtocartBtn" 
+        data-product="{{product.id}}"
+      >
+        <i class="fas fa-shopping-cart pr-2"></i>
+        Add to cart
+      </button>
+    </div>
+    <!-- Classic tabs -->
+    <div class="classic-tabs px-4 pt-1 col-lg-12">
+      <div class="box-element">
+        <ul
+          class="nav tabs-primary nav-justified"
+          id="advancedTab"
+          role="tablist"
+          style="background-color: antiquewhite;"
+        >
+          <li class="nav-item col-md-6">
+            <a
+              class="nav-link active show"
+              id="description-tab"
+              data-toggle="tab"
+              href="#description"
+              role="tab"
+              aria-controls="description"
+              aria-selected="true"
+              >Description</a
+            >
+          </li>
+          <li class="nav-item col-md-6">
+            <a
+              class="nav-link"
+              id="reviews-tab"
+              data-toggle="tab"
+              href="#reviews"
+              role="tab"
+              aria-controls="reviews"
+              aria-selected="false"
+              >Reviews ({{comments|length}})</a
+            >
+          </li>
+        </ul>
+      </div>
+      <div class="tab-content col-lg-12" id="advancedTabContent">
+        <div
+          class="tab-pane fade show active"
+          id="description"
+          role="tabpanel"
+          aria-labelledby="description-tab"
+        >
+          <h5>Product Description</h5>
+          <!-- <p class="small text-muted text-uppercase mb-2">{{product.category}}</p>
+          <h6>{{product.price}}</h6> -->
+          <p class="pt-1">
+            {{product.description}}
+          </p>
+        </div>
+        <div
+          class="tab-pane fade"
+          id="reviews"
+          role="tabpanel"
+          aria-labelledby="reviews-tab"
+        >
+          <h5><span>({{comments|length}})</span> review for <span>{{product.name}}</span></h5>
+          {% for comment in comments %}
+            <div class="media mt-3 mb-4" style="background-color: blanchedalmond; padding: 10px; border-radius: 4px;">
+              <div class="media-body">
+                <div class="d-sm-flex justify-content-between">
+                  <p class="mt-1 mb-2">
+                    <!-- show commented -->
+
+                    <strong>{{comment.customer}}</strong>
+                    <span>– </span><span>{{comment.created}}</span>
+                  </p>
+                </div>
+                <p class="mb-0">{{comment.content}}</p>
+              </div>
+            </div>
+          {% endfor %}
+          <hr />
+          <h5 class="mt-4">Write a review</h5>
+          <div>
+            <!-- Add review -->
+              <div class="md-form md-outline">
+                <!-- <label for="form76">Your review</label> -->
+                <textarea
+                  id="commentcontent"
+                  class="md-textarea form-control pr-6"
+                  rows="4"
+                  required
+                ></textarea>
+              </div>
+              <button 
+                data-product="{{product.id}}" data-action="addcomment" id="addcomment" class="btn btn-primary" style="border: 5px; margin: 10px 0px 20px 0px; float: right;"
+              >
+                Review
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Classic tabs -->
+  </div>
+</section>
+<script type="text/javascript" src="{% static 'js/addcomment.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/detailproduct.js' %}"></script>
+</script>
+{% endblock content %}

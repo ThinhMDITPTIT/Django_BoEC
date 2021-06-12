@@ -1,0 +1,141 @@
+{% extends 'store/main.html' %} {% load static %} {% block content %}
+{% if iscompleted%}
+<script type="text/javascript">
+  window.alert("Bạn đã thanh toán thành công")
+</script>
+{%endif%}
+<div class="row">
+  <div class="col-lg-4">
+    <div class="box-element" id="form-wrapper">
+      <form id="form" action="" method="POST">
+        {% csrf_token %}
+
+        <div id="shipping-info">
+          <p>Shipping Information:</p>
+          <hr />
+          <div id="user-info">
+            <div class="form-field">
+              <input
+                required
+                class="form-control"
+                type="text"
+                name="receiver_name"
+                placeholder="Receiver Name.."
+              />
+            </div>
+            <div class="form-field">
+              <input
+                required
+                class="form-control"
+                type="text"
+                name="receiver_phone"
+                placeholder="Phone.."
+              />
+            </div>
+          </div>
+          <hr />
+          <div class="form-field">
+            <input
+              class="form-control"
+              type="text"
+              name="city"
+              placeholder="City.."
+            />
+          </div>
+          <div class="form-field">
+            <input
+              class="form-control"
+              type="text"
+              name="address"
+              placeholder="Address.."
+            />
+          </div>
+          <div class="form-field">
+            <input
+              required
+              class="form-control"
+              type="datetime-local"
+              name="order_date"
+              placeholder="Order Date.."
+            />
+          </div>
+          <hr />
+          <p>Choose payment method:</p>
+          <div class="form-field">
+            <input
+              type="radio"
+              id="COD"
+              name="paymentmethod"
+              value="COD"
+              required
+            />
+            <label for="COD">COD</label><br />
+            <input
+              type="radio"
+              id="VNPAY"
+              name="paymentmethod"
+              value="VNPAY"
+              required
+            />
+            <label for="VNPAY">VNPAY</label>
+          </div>
+        </div>
+
+        <hr />
+        <input
+          id="form-button"
+          class="btn btn-success btn-block"
+          type="submit"
+          value="Continue"
+        />
+      </form>
+    </div>
+
+    <br />
+    <div class="box-element hidden" id="payment-info">
+      <small>Paypal Options</small>
+    </div>
+  </div>
+
+  <div class="col-lg-8">
+    <div class="box-element">
+      <a
+        style="border-radius: 0px 0px 0px 15px"
+        class="btn btn-dark"
+        href="{% url 'cart' %}"
+        >Back to Cart</a
+      >
+      <hr />
+      <h3>Order Summary</h3>
+      <hr />
+      <div class="cart-row">
+        <div style="flex: 2"></div>
+        <div style="flex: 2"><strong>Item</strong></div>
+        <div style="flex: 1"><strong>Price</strong></div>
+        <div style="flex: 1"><strong>Quantity</strong></div>
+        <div style="flex: 1"><strong>Total</strong></div>
+        <div style="flex: 1"><strong>Size</strong></div>
+      </div>
+      {% for item in items %}
+      <div class="cart-row">
+        <div style="flex: 2">
+          <img class="row-image" src="{{item.product.image.url}}" />
+        </div>
+        <div style="flex: 2"><p>{{item.product.name}}</p></div>
+        <div style="flex: 1"><p>{{item.product.price}}</p></div>
+        <div style="flex: 1"><p>{{item.quantity}}</p></div>
+        <div style="flex: 1">{{item.get_total}} VND</div>
+        <div style="flex: 1">{{item.option}}</div>
+      </div>
+      {% endfor %}
+      <div
+        class="form-inline my-2 my-lg-0"
+        style="display: flex; justify-content: space-between"
+      >
+        <h5>Items: {{order.get_cart_items}}</h5>
+        <h5>Total: {{order.get_cart_total|floatformat:2}} VND</h5>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

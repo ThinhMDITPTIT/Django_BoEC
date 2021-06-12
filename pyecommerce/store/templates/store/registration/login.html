@@ -1,0 +1,60 @@
+{% extends 'store/registration/registration.html' %} {% block content %}
+<div class="d-flex justify-content-center h-100">
+  <div class="card">
+    <div class="card-header d-flex justify-content-center">
+      <h3 style="margin-top: 20px">BabyShark Shopfs</h3>
+    </div>
+    <div
+      class="card-body"
+      style="display: flex; justify-content: center; align-items: center"
+    >
+      <form method="post" action="">
+        {% csrf_token %}
+        <div class="input-group form-group">
+          <div class="form-floating mb-3">
+            <label for="floatingInput" style="color: aqua; font-weight: bold"
+              >Username</label
+            >
+            <input
+              type="text"
+              name="username"
+              class="form-control"
+              id="floatingInput"
+              placeholder="username"
+              style="width: 18rem"
+            />
+          </div>
+        </div>
+        <div class="input-group form-group">
+          <div class="form-floating mb-3">
+            <label for="floatingInput" style="color: aqua; font-weight: bold"
+              >Password</label
+            >
+            <input
+              type="password"
+              name="password"
+              id="floatingPassword"
+              class="form-control"
+              placeholder="password"
+              style="width: 18rem"
+            />
+          </div>
+        </div>
+        <div class="form-group">
+          <a href="{% url 'store' %}" class="btn float-right login_btn"
+            >Cancel</a
+          >
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn float-right login_btn">Login</button>
+        </div>
+      </form>
+    </div>
+    <div class="card-footer">
+      <div class="d-flex justify-content-center links">
+        Don't have an account? &nbsp;<a href="{% url 'register' %}">Register</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

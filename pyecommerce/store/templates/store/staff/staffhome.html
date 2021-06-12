@@ -1,0 +1,67 @@
+{% extends 'store/staff/main.html' %} {% load static %} {% block content %}
+
+<div class="d-flex flex-column align-items-center text-center col-sm-12">
+  <h2>New Orders List Information</h2>
+</div>
+<div class="d-flex flex-column align-items-center text-center col-sm-12">
+  <div class="search">
+    <input type="text" placeholder=" Search By Order Code" name="search" />
+    <button>
+      <i class="fa fa-search" style="font-size: 18px"> </i>
+    </button>
+  </div>
+</div>
+<div class="card mb-3">
+<div class="card-body">
+<div class="align-items-center tablecontent">
+    <table>
+        <thead>
+          <tr>
+            <td>Order Code</td>
+            <td>Customer's Name</td>
+            <td>Total Price</td>
+            <td>Quantity</td>
+            <td>Status</td>
+            <td>Delivery Date</td>
+            <td colspan="4">Action</td>
+          </tr>
+        </thead>
+        <tbody>
+          {%for item in all_new_shipping%}
+            <tr>
+              <td>{{item.order.id}}</td>
+              <td>{{item.customer.user}}</td>
+              <td>{{item.order.get_cart_total}}</td>
+              <td>{{item.order.get_cart_items}}</td>
+              {%if item.status == "New"%}
+                <td style="color: rgb(9, 197, 15);">{{item.status}}</td>
+              {%else%}
+                <td style="color: coral">{{item.status}}</td>
+              {%endif%}
+              <td>{{item.order_date}}</td>
+              {%if item.status == "New" or item.status == "Pending"%}
+                <td><button data-shippingid="{{item.id}}" data-action="CANCEL_ORDER" name="cancleorder"  style="color:aliceblue;background-color: crimson;" class="btn mb-0 col-sm-12">Cancel</button></td>
+                <td><button data-shippingid="{{item.id}}" data-action="OUT_DELIVERY_ORDER" name="outdelivery"  style="color:aliceblue;background-color: cadetblue;" class="btn mb-0 col-sm-12">Out for delivery</button></td>
+              {%else%}
+                <td><button class="btn mb-0 col-sm-12" style="color:aliceblue;background-color: crimson;" disabled>Cancel</button></td>
+                <td><button  style="color:aliceblue;background-color: cadetblue;" class="btn mb-0 col-sm-12">Out for delivery</button></td>
+              {%endif%}
+              {%if item.status == "New" or item.status == "Out for delivery"%}
+                <td><button  data-shippingid="{{item.id}}" data-action="PENDING" name="pending" class="btn mb-0 col-sm-12" style="color:aliceblue;background-color: coral;">Pending</button></td>
+              {%else%}
+                <td><button class="btn mb-0 col-sm-12" style="color:aliceblue;background-color: coral;" disabled>Pending</button></td>
+              {%endif%}
+              {%if item.status == "Cancel" or item.status == "Pending" or item.status == "Delivered"%}
+                <td><button  disabled clickable class="btn btn-success mb-0 col-sm-12">Confirm Delivered</button></td>
+              {%else%}
+                <td><button  data-shippingid="{{item.id}}" data-action="CONFIRM_ORDER" name="confirmorder" class="btn btn-success mb-0 col-sm-12" >Confirm Delivered</button></td>
+              {%endif%}
+            </tr>
+          {%endfor%}
+        </tbody>
+      </table>
+</div>
+</div>
+</div>
+<script type="text/javascript" src="{% static 'js/staff.js' %}"></script>
+{% endblock content %}

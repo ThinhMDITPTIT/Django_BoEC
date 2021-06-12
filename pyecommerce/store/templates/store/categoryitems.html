@@ -1,0 +1,39 @@
+{% extends 'store/main.html' %} {% load static %} {% block content %}
+<h2 style="background-color: aquamarine; padding: 10px 20px 10px 40px">
+  {{categoryname}}
+</h2>
+<div class="row">
+  {% for items in categoryitems %}
+  <div class="col-lg-4" style="border-radius: 15px">
+    <img
+      style="border-radius: 10px 10px 0px 0px"
+      class="thumbnail"
+      src="{{items.image.url}}"
+    />
+    <div class="box-element product">
+      <h6><strong>{{items.name}}</strong></h6>
+      <hr />
+      <div
+        class="form-inline my-2 my-lg-0"
+        style="display: flex; justify-content: space-between"
+      >
+        <h6 style="display: inline-block">
+          <strong>{{items.price|floatformat:2}} VND</strong>
+        </h6>
+        <div class="form-inline my-2 my-lg-0">
+          <a
+            class="btn btn-success"
+            style="border-radius: 0 0 10px 0"
+            name="detailproduct"
+            data-action="viewproduct"
+            data-product="{{items.id}}"
+            href="{% url 'detailproduct' pk=items.id %}"
+            >View</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock content %}
