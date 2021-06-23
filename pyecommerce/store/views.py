@@ -58,12 +58,12 @@ def checkout(request):
                 order.iscompleted=True
                 order.save()
                 if paymentmethod == 'COD':
-                    shipping.status = 'Out for delivery'
+                    shipping.status = 'New'
                     shipping.save()
                     payment.payment_factory
                 if paymentmethod == 'VNPAY':
                     payment.payment_factory
-                    shipping.status = 'Out for delivery'
+                    shipping.status = 'New'
                     shipping.save()
                 context = {'iscompleted': order.iscompleted}
                 return render(request, 'store/checkout.html', context)
@@ -258,6 +258,23 @@ def category(request, name):
         products = Product.objects.filter(tags__name=name)
     print(products)
     context = {'categoryitems': products, 'cartItems': cartItems, 'categoryname': name}
+    return render(request, 'store/categoryitems.html', context)
+
+def searchByName(request, productname):
+    print(productname)
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, iscompleted=False)
+        items = order.orderitem_set.all()
+        cartItems = order.get_cart_items
+    else:
+        items = []
+        order = {'get_cart_total': 0, 'get_cart_items': 0}
+        cartItems = order['get_cart_items']
+    if Product.objects.get(name=productname).exists():
+        products = Product.objects.get(name=productname)
+    print(products)
+    context = {'categoryitems': products, 'cartItems': cartItems, 'categoryname': productname}
     return render(request, 'store/categoryitems.html', context)
 
 

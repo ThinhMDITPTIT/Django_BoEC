@@ -52,6 +52,11 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
+    # @property
+    # def get_product_by_name(self):
+    #     orderitems = self.orderitem_set.all()
+    #     totalprice = sum([item.get_total for item in orderitems])
+    #     return totalprice
 
 class Comment(models.Model):
     content = models.TextField()

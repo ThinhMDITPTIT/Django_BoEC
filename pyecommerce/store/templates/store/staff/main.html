@@ -95,9 +95,10 @@
           >BabyShark <span class="sr-only">(current)</span></a
         >
         <a href="{% url 'categoryorder' category='New' %}">New Order</a>
-        <a  href="{% url 'categoryorder' category='Delivered' %}">Delived Order</a>
-        <a href="{% url 'categoryorder' category='Cancel' %}">Cancel Order</a>
+        <a href="{% url 'categoryorder' category='Delivered' %}">Delived Order</a>
+        <a href="{% url 'categoryorder' category='Pending' %}">Pending Order</a>
         <a href="{% url 'categoryorder' category='Out for delivery' %}">Out for delivery</a>
+        <a href="{% url 'categoryorder' category='Cancel' %}">Cancel Order</a>
       </div>
     </div>
     <div class="container col-md-8">

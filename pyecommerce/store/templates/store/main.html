@@ -67,9 +67,7 @@
                   href="{% url 'category' name='Crop Top' %}"
                   >Crop Top</a
                 >
-                <a
-                  class="dropdown-item"
-                  href="{% url 'category' name='Pant' %}"
+                <a class="dropdown-item" href="{% url 'category' name='Pant' %}"
                   >Pant</a
                 >
                 <a
@@ -83,14 +81,38 @@
                   >Shoes</a
                 >
                 <a
-                class="dropdown-item"
-                href="{% url 'category' name='Sport equipment' %}"
-                >Sport equipment</a
-              >
+                  class="dropdown-item"
+                  href="{% url 'category' name='Sport equipment' %}"
+                  >Sport equipment</a
+                >
               </div>
             </div>
           </li>
         </ul>
+        <div style="display: flex; width: 60%; justify-content: space-around">
+          <div class="search-container">
+            <input
+              style="
+                border-radius: 5px;
+                width: 250px;
+                height: 35px;
+                padding: 5px;
+              "
+              id="searchInput"
+              type="text"
+              placeholder="Search by Tag ..."
+              name="search"
+            />
+            <Button
+              class="btn btn-success"
+              style="border-radius: 5px; margin-right: 20px"
+              id="searchBtn"
+            >
+              Search
+            </Button
+            >
+          </div>
+        </div>
         <div
           class="form-inline my-2 my-lg-0"
           style="display: flex; justify-content: space-between"
@@ -158,6 +180,7 @@
       crossorigin="anonymous"
     ></script>
     <script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/searchTag.js' %}"></script>
     <script src="https://cdn.jsdelivr.net/npm/moment@2.24.0/moment.min.js"></script>
     <script type="text/javascript">
       var user = '{{request.user}}';

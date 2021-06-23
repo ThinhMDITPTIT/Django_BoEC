@@ -1,22 +1,25 @@
 {% extends 'store/main.html' %} {% load static %} {% block content %}
 <style>
   table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
 
-td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-table, th, td {
-	  border: 1px solid black;
-	}
-	table {
-	  border-spacing: 3px;
-	}
+  td,
+  th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  table,
+  th,
+  td {
+    border: 1px solid black;
+  }
+  table {
+    border-spacing: 3px;
+  }
 </style>
 <div class="container">
   <div class="main-body">
@@ -206,7 +209,7 @@ table, th, td {
                 </svg>
                 Total order: &nbsp;
               </h6>
-              <span class="text-secondary">{{count_order}} VND</span>
+              <span class="text-secondary">{{count_order}}</span>
             </li>
           </ul>
         </div>
@@ -230,13 +233,13 @@ table, th, td {
               </thead>
               <tbody>
                 {%for item in all_orders%}
-                  <tr>
-                    <td>{{item.order.id}}</td>
-                    <td>{{item.order.get_cart_total}}</td>
-                    <td>{{item.order.get_cart_items}}</td>
-                    <td>{{item.status}}</td>
-                    <td>{{item.order_date}}</td>
-                    {%if item.status == "New" or item.status == "Pending"%}
+                <tr>
+                  <td>{{item.order.id}}</td>
+                  <td>{{item.order.get_cart_total}}</td>
+                  <td>{{item.order.get_cart_items}}</td>
+                  <td>{{item.status}}</td>
+                  <td>{{item.order_date}}</td>
+                  {%if item.status == "New" or item.status == "Pending"%}
                       <td><button data-shippingid="{{item.id}}" data-action="CANCEL_ORDER" name="cancleorder"  style="color:aliceblue;background-color: chocolate;" class="btn mb-0 col-sm-12">Cancel</button></td>
                     {%else%}
                     <td><button class="btn mb-0 col-sm-12" style="color:aliceblue;background-color: chocolate;" disabled>Cancel</button></td>
@@ -246,7 +249,7 @@ table, th, td {
                     {%else%}
                     <td><button  data-shippingid="{{item.id}}" data-action="CONFIRM_ORDER" name="confirmorder" class="btn btn-success mb-0 col-sm-12" >Confirm Delivered</button></td>
                     {%endif%}
-                  </tr>
+                </tr>
                 {%endfor%}
               </tbody>
             </table>
